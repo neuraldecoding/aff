@@ -1,10 +1,40 @@
-# aff
-Adaptive Feature Fusion for EEG-Based Neural Decoding
+# Adaptive Feature Fusion for EEG-Based Neural Decoding
 
+Berikut adalah tiga artefak inti dari pendekatan ini:
 
-tiga artefak inti:
-1. Definisi formal operator fusi adaptif. Bukan konkatenasi statis, melainkan pembobotan input-dependent:                                                                         Diberikan representasi multi-domain $h_t$ (temporal), $h_s$ (spasial), $h_f$ (spektral), fusi adaptif menghasilkan $z = \sum_{m\in{t,s,f}} \alpha_m(x), g_m(h_m)$, dengan bobot $\alpha_m(x)$ dihitung dinamis per-sampel via gating/cross-attention, $\sum_m \alpha_m = 1$.
-Inilah "tulang" yang membuat judul punya isi. Persamaan ini yang sekarang sama sekali tidak ada.                                                                                  2. Satu arsitektur usulan yang menyatukan 4 blok (Transformer, Diffusion, CLIP, Mamba) jadi satu pipeline — bukan 4 deskripsi terpisah seperti bab3 lama:
-```txt
-EEG ─┬─ Temporal encoder (Mamba/TCN) ─┐                                                                                                                                                ├─ Spatial encoder (graph/attn)  ├─► [ADAPTIVE FUSION MODULE] ─► z                                                                                                                └─ Spectral encoder (wavelet/PSD)┘        (gating + cross-attn)     │                                                                                                                                                                                 ├─► Contrastive align (CLIP) → konsistensi semantik                                                                                                                               ├─► Classification head        → task klasifikasi                                                                                                                                 └─► Diffusion decoder          → task rekonstruksi                                                              Adaptasi lintas-subjek: PEFT/adapter pada FUSION MODULE → "fusion foundation model"
+### 1. Definisi Formal Operator Fusi Adaptif
+
+Fusi ini tidak menggunakan konkatenasi statis, melainkan pembobotan yang bergantung pada input (*input-dependent*). Diberikan representasi multi-domain:
+
+* $h_t$ (Temporal)
+* $h_s$ (Spasial)
+* $h_f$ (Spektral)
+
+Proses fusi adaptif menghasilkan representasi $z$ yang dirumuskan secara dinamis sebagai:
+
+$$z = \sum_{m \in \{t,s,f\}} \alpha_m(x) \cdot g_m(h_m)$$
+
+Dengan bobot $\alpha_m(x)$ dihitung per-sampel melalui mekanisme *gating* atau *cross-attention*, di mana total bobot harus memenuhi:
+
+$$\sum_m \alpha_m = 1$$
+
+> **Catatan Utama:** Inilah "tulang" yang membuat judul memiliki substansi. Persamaan matematis ini adalah komponen krusial yang sebelumnya belum ada dalam draf.
+
+### 2. Kesatuan Arsitektur Pipeline
+
+Sebuah arsitektur usulan yang menyatukan 4 blok utama (Transformer, Diffusion, CLIP, Mamba) menjadi satu *pipeline* terintegrasi — bukan lagi 4 deskripsi terpisah seperti pada Bab 3 versi lama.
+
+```text
+EEG ─┬─ Temporal encoder (Mamba/TCN) ─┐
+     ├─ Spatial encoder (graph/attn)  ├─► [ADAPTIVE FUSION MODULE] ─► z
+     └─ Spectral encoder (wavelet/PSD)┘     (gating + cross-attn)     │
+                                                                      │
+                                 ├─► Contrastive align (CLIP) → konsistensi semantik
+                                 ├─► Classification head      → task klasifikasi
+                                 └─► Diffusion decoder        → task rekonstruksi
+
 ```
+
+### 3. Adaptasi Lintas-Subjek
+
+Penerapan *Parameter-Efficient Fine-Tuning* (PEFT) atau *adapter* secara spesifik pada **FUSION MODULE**. Pendekatan ini bertujuan untuk membentuk sebuah *"fusion foundation model"* yang tangguh terhadap variasi data antar-subjek.
