@@ -1,5 +1,40 @@
 # Adaptive Feature Fusion for EEG-Based Neural Decoding
 
+## BCI lebih luas dari neural decoding.
+
+### Hierarki konsepnya
+
+```
+Brain-Computer Interface (BCI)
+├── Neural Decoding          ← komponen inti BCI
+│   ├── Motor imagery
+│   ├── SSVEP
+│   ├── P300
+│   └── Speech decoding
+├── Signal acquisition
+├── Feedback/output system
+└── User interface
+```
+
+### Perbedaan scope
+
+| | BCI | Neural Decoding |
+|---|---|---|
+| **Definisi** | Sistem lengkap: akuisisi → decoding → feedback | Khusus proses interpretasi sinyal otak → intent/command |
+| **Mencakup** | Hardware, software, user loop, aplikasi | Model, algoritma, representasi fitur |
+| **Contoh paper** | "A BCI system for wheelchair control" | "Decoding motor imagery from EEG using SSMs" |
+| **Fokus** | End-to-end aplikasi | Komponen algoritmik |
+
+### Implikasi untuk judulmu
+
+Karena kontribusimu adalah **arsitektur fusion** — yang merupakan komponen algoritmik — maka:
+
+- **Neural decoding** lebih presisi untuk scope kontribusimu
+- **BCI** lebih tepat jika kamu juga membahas sistem lengkap sampai output/feedback
+
+Jadi judul saat ini sudah tepat menggunakan *neural decoding* — itu justru menunjukkan kamu tahu persis di layer mana kontribusimu berada, bukan overclaim ke sistem BCI secara keseluruhan.
+
+**Pertahankan versi sekarang.**
 
 ## Kontribusi utama: sebuah metode adaptive feature fusion
 
@@ -84,6 +119,36 @@ EEG ─┬─ Temporal encoder (Mamba/TCN) ─┐
                                  └─► Diffusion decoder        → task rekonstruksi
 
 ```
+
+### Perbandingan
+
+| | Dengan "Architecture" | Tanpa "Architecture" |
+|---|---|---|
+| **Judul** | *Adaptive Feature Fusion **Architecture** for EEG-Based Neural Decoding* | *Adaptive Feature Fusion for EEG-Based Neural Decoding* |
+| **Panjang** | 9 kata | 7 kata |
+| **Beban pembuktian** | Harus merancang arsitektur lengkap yang terdokumentasi | Cukup membuktikan mekanisme fusion-nya adaptif |
+| **Fleksibilitas scope** | Lebih rigid | Lebih fleksibel |
+| **Kesan** | Engineering-heavy | Balanced antara metode dan aplikasi |
+
+---
+
+### Rekomendasi
+
+**Gunakan tanpa "Architecture"** jika:
+- Kontribusi utamamu adalah **mekanisme fusion**-nya (cara CCA/HHT/LDA digabungkan secara adaptif)
+- Kamu tidak merancang sistem end-to-end dari scratch
+
+**Pertahankan "Architecture"** jika:
+- Kamu merancang **modul/sistem lengkap** dengan komponen yang terdefinisi jelas
+- Ada diagram arsitektur yang jadi kontribusi tersendiri di disertasi
+
+### Verdict
+
+> **"Adaptive Feature Fusion for EEG-Based Neural Decoding"**
+
+Judul ini **clean, precise, dan kuat**. Tujuh kata yang masing-masing bekerja — tidak ada kata yang sia-sia.
+
+Ini pilihan yang sangat baik untuk judul disertasi.
 
 ### 3. Adaptasi Lintas-Subjek
 
