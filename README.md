@@ -1,5 +1,44 @@
 # Adaptive Feature Fusion for EEG-Based Neural Decoding
 
+
+## Kontribusi utama yang terbaca dari judul ini
+
+> *"Adaptive Feature Fusion for EEG-Based Neural Decoding"*
+
+Kontribusi utamanya adalah **bagaimana** fitur-fitur EEG (dari CCA, HHT, LDA) digabungkan secara **adaptif** — bukan model decoding-nya itu sendiri.
+
+### Framing kontribusi yang konsisten
+
+```
+Yang BUKAN kontribusi utamamu:
+├── CCA → sudah ada
+├── HHT → sudah ada  
+├── LDA → sudah ada
+└── Neural decoding model → sudah ada
+
+Yang JADI kontribusi utamamu:
+└── Mekanisme BAGAIMANA ketiga fitur itu
+    digabungkan secara adaptif → INI NOVELTY-mu
+```
+
+### Implikasi ke isi disertasi
+
+Dengan framing ini, bab metodologi harus menjawab dengan jelas:
+
+| Pertanyaan | Yang harus ada di disertasi |
+|---|---|
+| Adaptif terhadap **apa**? | Input signal, task, atau subject variability |
+| **Bagaimana** adaptasinya? | Attention weights, gating, learned combination |
+| **Mengapa** CCA + HHT + LDA? | Justifikasi dari literatur — SLR-mu bisa jadi fondasinya |
+| **Seberapa baik** dibanding static fusion? | Eksperimen komparatif |
+
+
+### Kekuatan posisi ini
+
+SLR-mu tentang Modern SSMs untuk BCI secara tidak langsung menjadi **justifikasi literatur** mengapa mekanisme fusion yang ada saat ini belum optimal — dan mengapa arsitektur adaptif yang kamu rancang mengisi gap tersebut.
+
+SLR dan novel method-mu jadi **satu kesatuan narasi penelitian** yang kohesif.
+
 ## BCI lebih luas dari neural decoding.
 
 ### Hierarki konsepnya
