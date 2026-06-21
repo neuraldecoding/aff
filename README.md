@@ -1,138 +1,74 @@
-# Adaptive Feature Fusion for EEG-Based Neural Decoding
+# Kerangka Disertasi: Adaptive Feature Fusion for EEG-Based Neural Decoding
 
+## 1. Pemilihan Judul dan Ruang Lingkup Penelitian
 
-## Kontribusi utama yang terbaca dari judul ini
+Bagian ini memvalidasi posisi penelitian dan membatasi *scope* agar fokus pada algoritma inti, bukan pada sistem *end-to-end*.
 
-> *"Adaptive Feature Fusion for EEG-Based Neural Decoding"*
+### Mengapa "Neural Decoding" dan bukan "BCI"?
 
-Kontribusi utamanya adalah **bagaimana** fitur-fitur EEG (dari CCA, HHT, LDA) digabungkan secara **adaptif** — bukan model decoding-nya itu sendiri.
-
-### Framing kontribusi yang konsisten
-
-```
-Yang BUKAN kontribusi utamamu:
-├── CCA → sudah ada
-├── HHT → sudah ada  
-├── LDA → sudah ada
-└── Neural decoding model → sudah ada
-
-Yang JADI kontribusi utamamu:
-└── Mekanisme BAGAIMANA ketiga fitur itu
-    digabungkan secara adaptif → INI NOVELTY-mu
-```
-
-### Implikasi ke isi disertasi
-
-Dengan framing ini, bab metodologi harus menjawab dengan jelas:
-
-| Pertanyaan | Yang harus ada di disertasi |
-|---|---|
-| Adaptif terhadap **apa**? | Input signal, task, atau subject variability |
-| **Bagaimana** adaptasinya? | Attention weights, gating, learned combination |
-| **Mengapa** CCA + HHT + LDA? | Justifikasi dari literatur — SLR-mu bisa jadi fondasinya |
-| **Seberapa baik** dibanding static fusion? | Eksperimen komparatif |
-
-
-### Kekuatan posisi ini
-
-SLR-mu tentang Modern SSMs untuk BCI secara tidak langsung menjadi **justifikasi literatur** mengapa mekanisme fusion yang ada saat ini belum optimal — dan mengapa arsitektur adaptif yang kamu rancang mengisi gap tersebut.
-
-SLR dan novel method-mu jadi **satu kesatuan narasi penelitian** yang kohesif.
-
-## BCI lebih luas dari neural decoding.
-
-### Hierarki konsepnya
-
-```
-Brain-Computer Interface (BCI)
-├── Neural Decoding          ← komponen inti BCI
-│   ├── Motor imagery
-│   ├── SSVEP
-│   ├── P300
-│   └── Speech decoding
-├── Signal acquisition
-├── Feedback/output system
-└── User interface
-```
-
-### Perbedaan scope
-
-| | BCI | Neural Decoding |
-|---|---|---|
-| **Definisi** | Sistem lengkap: akuisisi → decoding → feedback | Khusus proses interpretasi sinyal otak → intent/command |
-| **Mencakup** | Hardware, software, user loop, aplikasi | Model, algoritma, representasi fitur |
-| **Contoh paper** | "A BCI system for wheelchair control" | "Decoding motor imagery from EEG using SSMs" |
+| Parameter | Brain-Computer Interface (BCI) | Neural Decoding |
+| --- | --- | --- |
+| **Definisi** | Sistem lengkap: akuisisi → decoding → feedback | Proses interpretasi sinyal otak → intent/command |
+| **Cakupan** | Hardware, software, user loop, aplikasi | Model, algoritma, representasi fitur |
 | **Fokus** | End-to-end aplikasi | Komponen algoritmik |
 
-### Implikasi untuk judulmu
+**Kesimpulan:** Judul saat ini sudah tepat menggunakan *neural decoding*. Ini menunjukkan kepastian di *layer* mana kontribusi berada dan menghindari *overclaim* terhadap sistem BCI secara keseluruhan.
 
-Karena kontribusimu adalah **arsitektur fusion** — yang merupakan komponen algoritmik — maka:
+### Analisis Penggunaan Kata "Architecture"
 
-- **Neural decoding** lebih presisi untuk scope kontribusimu
-- **BCI** lebih tepat jika kamu juga membahas sistem lengkap sampai output/feedback
+| Parameter | Menggunakan "Architecture" | Tanpa "Architecture" |
+| --- | --- | --- |
+| **Beban Pembuktian** | Harus merancang sistem lengkap yang terdokumentasi | Cukup membuktikan mekanisme fusi adaptifnya |
+| **Fleksibilitas** | Lebih rigid (engineering-heavy) | Seimbang antara metode dan aplikasi |
 
-Jadi judul saat ini sudah tepat menggunakan *neural decoding* — itu justru menunjukkan kamu tahu persis di layer mana kontribusimu berada, bukan overclaim ke sistem BCI secara keseluruhan.
+**Verdict:** Judul **"Adaptive Feature Fusion for EEG-Based Neural Decoding"** adalah pilihan terbaik. Tujuh kata yang padat, presisi, dan kuat tanpa ada kata yang sia-sia.
 
-**Pertahankan versi sekarang.**
+---
 
-## Kontribusi utama: sebuah metode adaptive feature fusion
+## 2. Definisi Kontribusi Utama
 
-### Perbedaan algoritma vs model
+Kontribusi utama penelitian ini adalah **bagaimana** fitur-fitur EEG digabungkan, bukan sekadar menggunakan model yang sudah ada.
 
-| | Algoritma | Model |
-|---|---|---|
-| **Definisi** | Prosedur/langkah yang terdefinisi | Representasi matematis yang dilatih dari data |
-| **Output** | Pseudocode, flowchart, prosedur | Bobot/parameter yang bisa digunakan untuk prediksi |
-| **Diuji dengan** | Complexity analysis, correctness proof | Akurasi, F1, MSE pada dataset |
-| **Contoh** | Quicksort, Viterbi, CCA | CNN, LSTM, Transformer |
+### Framing Novelty
 
-### Jawaban yang tepat untuk judulmu
+* **Bukan Kontribusi Utama:** Metode ekstraksi fitur (CCA, HHT, LDA) atau *neural decoding model* itu sendiri (sudah ada).
+* **Kontribusi Utama:** Mekanisme pembobotan dan penggabungan ketiga fitur tersebut secara **adaptif**.
 
-> *"Adaptive Feature Fusion for EEG-Based Neural Decoding"*
+### Hierarki Posisi Penelitian (Metode vs Algoritma vs Model)
 
-Output kontribusimu adalah **keduanya, tapi dengan hierarki:**
+Output kontribusi mencakup ketiganya, namun dengan hierarki yang jelas:
 
-```
-Kontribusi utama → METODE (fusion mechanism)
-        │
-        ├── Diformulasikan sebagai → ALGORITMA
-        │   (langkah adaptasi, pembobotan fitur)
-        │
-        └── Diimplementasikan sebagai → MODEL
-            (dilatih pada dataset EEG, diuji performanya)
-```
+* **Kontribusi Utama (Metode):** *Adaptive feature fusion* yang mencakup prosedur dan justifikasi logis.
+* **Formulasi (Algoritma):** Langkah adaptasi dan pembobotan fitur secara matematis.
+* **Implementasi (Model):** Dilatih pada dataset EEG dan diuji performanya.
 
-### Jawaban tegas di sidang
-
+> **Argumentasi Sidang:**
 > *"Kontribusi utama saya adalah sebuah **metode** adaptive feature fusion — yang secara operasional diformulasikan sebagai algoritma pembobotan adaptif, dan divalidasi melalui implementasi model yang diuji pada dataset EEG benchmark."*
 
-### Yang membuat jawaban ini defensible
+*(Catatan Batasan: Siapkan jawaban untuk bab limitasi mengenai apakah metode fusi ini secara eksklusif hanya untuk sinyal EEG, atau dapat digeneralisasi ke fMRI/fNIRS).*
 
-Kamu tidak perlu memilih salah satu — justru **metode** adalah kata yang paling tepat karena:
+---
 
-- Lebih luas dari algoritma (mencakup prosedur + justifikasi)
-- Lebih tepat dari model (karena novelty-mu bukan di parameter-nya tapi di cara fusion-nya)
-- Lazim digunakan di disertasi bidang signal processing dan BCI
+## 3. Implikasi pada Bab Metodologi
 
-### Satu hal yang perlu disiapkan
+Dengan berbekal tinjauan literatur (*Systematic Literature Review*) mengenai model *State Space* modern, metodologi penelitian harus secara eksplisit menjawab matriks berikut:
 
-Penguji biasanya follow-up dengan:
+| Pertanyaan Kunci | Elemen yang Harus Ada di Disertasi |
+| --- | --- |
+| **Adaptif terhadap apa?** | Variabilitas input signal, task, atau antar-subjek. |
+| **Bagaimana adaptasinya?** | Penggunaan attention weights, gating, atau learned combination. |
+| **Mengapa CCA + HHT + LDA?** | Justifikasi dari literatur dan SLR sebagai fondasi argumen. |
+| **Seberapa baik hasilnya?** | Eksperimen komparatif melawan metode *static fusion*. |
 
-> *"Apakah metode ini generalizable ke sinyal lain selain EEG?"*
+---
 
-Siapkan jawaban — apakah kamu mengklaim hanya untuk EEG, atau mekanisme fusion-nya bisa diaplikasikan ke fMRI/fNIRS juga. Batasannya perlu terdefinisi jelas di bab limitations.
+## 4. Tiga Artefak Inti Penelitian
 
+Ketiga artefak ini adalah "tulang punggung" operasional yang membuktikan kebaruan dari judul penelitian.
 
+### Artefak 1: Definisi Formal Operator Fusi Adaptif
 
-## Berikut adalah tiga artefak inti dari pendekatan ini:
-
-### 1. Definisi Formal Operator Fusi Adaptif
-
-Fusi ini tidak menggunakan konkatenasi statis, melainkan pembobotan yang bergantung pada input (*input-dependent*). Diberikan representasi multi-domain:
-
-* $h_t$ (Temporal)
-* $h_s$ (Spasial)
-* $h_f$ (Spektral)
+Fusi tidak menggunakan konkatenasi statis, melainkan pembobotan yang bergantung pada input (*input-dependent*). Diberikan representasi multi-domain $h_t$ (temporal), $h_s$ (spasial), dan $h_f$ (spektral).
 
 Proses fusi adaptif menghasilkan representasi $z$ yang dirumuskan secara dinamis sebagai:
 
@@ -142,11 +78,9 @@ Dengan bobot $\alpha_m(x)$ dihitung per-sampel melalui mekanisme *gating* atau *
 
 $$\sum_m \alpha_m = 1$$
 
-> **Catatan Utama:** Inilah "tulang" yang membuat judul memiliki substansi. Persamaan matematis ini adalah komponen krusial yang sebelumnya belum ada dalam draf.
+### Artefak 2: Kesatuan Arsitektur Pipeline
 
-### 2. Kesatuan Arsitektur Pipeline
-
-Sebuah arsitektur usulan yang menyatukan 4 blok utama (Transformer, Diffusion, CLIP, Mamba) menjadi satu *pipeline* terintegrasi — bukan lagi 4 deskripsi terpisah seperti pada Bab 3 versi lama.
+Arsitektur usulan menyatukan 4 blok utama (Transformer, Diffusion, CLIP, Mamba) ke dalam satu *pipeline* pemrosesan yang terintegrasi.
 
 ```text
 EEG ─┬─ Temporal encoder (Mamba/TCN) ─┐
@@ -159,36 +93,6 @@ EEG ─┬─ Temporal encoder (Mamba/TCN) ─┐
 
 ```
 
-### Perbandingan
+### Artefak 3: Adaptasi Lintas-Subjek
 
-| | Dengan "Architecture" | Tanpa "Architecture" |
-|---|---|---|
-| **Judul** | *Adaptive Feature Fusion **Architecture** for EEG-Based Neural Decoding* | *Adaptive Feature Fusion for EEG-Based Neural Decoding* |
-| **Panjang** | 9 kata | 7 kata |
-| **Beban pembuktian** | Harus merancang arsitektur lengkap yang terdokumentasi | Cukup membuktikan mekanisme fusion-nya adaptif |
-| **Fleksibilitas scope** | Lebih rigid | Lebih fleksibel |
-| **Kesan** | Engineering-heavy | Balanced antara metode dan aplikasi |
-
----
-
-### Rekomendasi
-
-**Gunakan tanpa "Architecture"** jika:
-- Kontribusi utamamu adalah **mekanisme fusion**-nya (cara CCA/HHT/LDA digabungkan secara adaptif)
-- Kamu tidak merancang sistem end-to-end dari scratch
-
-**Pertahankan "Architecture"** jika:
-- Kamu merancang **modul/sistem lengkap** dengan komponen yang terdefinisi jelas
-- Ada diagram arsitektur yang jadi kontribusi tersendiri di disertasi
-
-### Verdict
-
-> **"Adaptive Feature Fusion for EEG-Based Neural Decoding"**
-
-Judul ini **clean, precise, dan kuat**. Tujuh kata yang masing-masing bekerja — tidak ada kata yang sia-sia.
-
-Ini pilihan yang sangat baik untuk judul disertasi.
-
-### 3. Adaptasi Lintas-Subjek
-
-Penerapan *Parameter-Efficient Fine-Tuning* (PEFT) atau *adapter* secara spesifik pada **FUSION MODULE**. Pendekatan ini bertujuan untuk membentuk sebuah *"fusion foundation model"* yang tangguh terhadap variasi data antar-subjek.
+Penerapan *Parameter-Efficient Fine-Tuning* (PEFT) atau *adapter* secara spesifik pada **FUSION MODULE**. Pendekatan ini bertujuan untuk merancang sebuah *"fusion foundation model"* yang secara konsisten tangguh mengatasi tingginya variabilitas data antar-subjek.
