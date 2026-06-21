@@ -1,7 +1,7 @@
 # Adaptive Feature Fusion for EEG-Based Neural Decoding
 
 
-## Pertanyaan yang bagus — dan kamu perlu punya jawaban yang tegas untuk ini di sidang.
+## Kontribusi utama: sebuah metode adaptive feature fusion
 
 ### Perbedaan algoritma vs model
 
